@@ -181,6 +181,9 @@ public class PlayerController : MonoBehaviour
                     animator.SetTrigger(AnimationStrings.spellCastTrigger);
                     _hasAttacked = true;
                     break;
+                case "Empty":
+                    NextAttack();
+                    break;
             }
         } 
     }

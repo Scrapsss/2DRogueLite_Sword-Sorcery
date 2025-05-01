@@ -76,8 +76,8 @@ public class EnemyController : MonoBehaviour
 
         AttackList[0] = "MeleeAttack_1";
         AttackList[1] = "MeleeAttack_2";
-        AttackList[2] = "SpellCast_1";
-        AttackList[3] = "SpellCast_1";
+        AttackList[2] = "Empty";
+        AttackList[3] = "Empty";
     }
 
     // Update is called once per frame
@@ -132,6 +132,9 @@ public class EnemyController : MonoBehaviour
                 case "SpellCast_1":
                     animator.SetTrigger(AnimationStrings.spellCastTrigger);
                     _hasAttacked = true;
+                    break;
+                case "Empty":
+                    NextAttack();
                     break;
             }
         }
