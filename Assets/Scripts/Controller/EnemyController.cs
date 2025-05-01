@@ -52,6 +52,10 @@ public class EnemyController : MonoBehaviour
     public GameObject GameManager_GO;
     private GameManager _gameManagerScript;
 
+    //UIManager pour modifier l'ATH
+    public GameObject UIManager_GO;
+    private UIManager _uiManagerScript;
+
 
 
 
@@ -71,6 +75,9 @@ public class EnemyController : MonoBehaviour
 
         GameManager_GO = GameObject.FindWithTag("GameManager");
         _gameManagerScript = GameManager_GO.GetComponent<GameManager>();
+
+        UIManager_GO = GameObject.FindWithTag("UIManager");
+        _uiManagerScript = UIManager_GO.GetComponent<UIManager>();
 
         _spawnPoint = transform.position.x;
 
@@ -200,12 +207,14 @@ public class EnemyController : MonoBehaviour
         {
             if (Damage - _enemyStats.physicArmor <= 0)
             {
-                print("blocked");
+                animator.SetTrigger(AnimationStrings.blockTrigger);
+                _uiManagerScript.BlockDamage(gameObject);
             }
             else
             {
                 _enemyStats.hp -= Damage - _enemyStats.physicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
+                _uiManagerScript.TookDamage(gameObject, Damage);
             }
         }
     }
@@ -216,12 +225,14 @@ public class EnemyController : MonoBehaviour
         {
             if (Damage - _enemyStats.magicArmor <= 0)
             {
-                print("blocked");
+                animator.SetTrigger(AnimationStrings.blockTrigger);
+                _uiManagerScript.BlockDamage(gameObject);
             }
             else
             {
                 _enemyStats.hp -= Damage - _enemyStats.magicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
+                _uiManagerScript.TookDamage(gameObject, Damage);
             }
         }
     }
@@ -242,8 +253,7 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool(AnimationStrings.isDead, true);
             _state = STATE.DEAD;
+            _gameManagerScript._gameState = GameManager.STATE.WIN;
         }
     }
-
-
 }

@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
     public GameObject GameManager_GO;
     private GameManager _gameManagerScript;
 
+    //UIManager pour modifier l'ATH
+    public GameObject UIManager_GO;
+    private UIManager _uiManagerScript;
+
 
     //L'état du personnage
     enum STATE { 
@@ -80,6 +84,9 @@ public class PlayerController : MonoBehaviour
 
         GameManager_GO = GameObject.FindWithTag("GameManager");
         _gameManagerScript = GameManager_GO.GetComponent<GameManager>();
+
+        UIManager_GO = GameObject.FindWithTag("UIManager");
+        _uiManagerScript = UIManager_GO.GetComponent<UIManager>();
 
         _spawnPoint = transform.position.x;
 
@@ -225,11 +232,13 @@ public class PlayerController : MonoBehaviour
             if (Damage - _playerStats.physicArmor <= 0)
             {
                 animator.SetTrigger(AnimationStrings.blockTrigger);
+                _uiManagerScript.BlockDamage(gameObject);
             }
             else
             {
                 _playerStats.hp -= Damage - _playerStats.physicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
+                _uiManagerScript.TookDamage( gameObject, Damage );
             }
         }
     }
@@ -241,11 +250,13 @@ public class PlayerController : MonoBehaviour
             if (Damage - _playerStats.magicArmor <= 0)
             {
                 animator.SetTrigger(AnimationStrings.blockTrigger);
+                _uiManagerScript.BlockDamage(gameObject);
             }
             else
             {
                 _playerStats.hp -= Damage - _playerStats.magicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
+                _uiManagerScript.TookDamage(gameObject, Damage);
             }
         }
     }
@@ -255,6 +266,8 @@ public class PlayerController : MonoBehaviour
         if (_playerStats.IsDead)
         {
             animator.SetBool(AnimationStrings.isDead, true);
+            _state = STATE.DEAD;
+            _gameManagerScript._gameState = GameManager.STATE.LOOSE;
         }
     }
 }
