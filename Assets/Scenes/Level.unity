@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 701423859}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -457,6 +457,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1268946061403642468, guid: 857622b83fc10aa499c61d53882b6898, type: 3}
   HeroSpawn: {fileID: 1656862302}
   EnemySpawn: {fileID: 1831667269}
+  _gameState: 0
 --- !u!1 &771440247
 GameObject:
   m_ObjectHideFlags: 0
