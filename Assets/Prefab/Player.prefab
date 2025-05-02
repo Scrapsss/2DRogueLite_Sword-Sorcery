@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager_GO: {fileID: 0}
+  UIManager_GO: {fileID: 0}
 --- !u!114 &-6482675631833628044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,12 +138,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f50b30d065793458e77cfc86bf0311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   name: Hero
   level: 1
-  hp: 20
-  physicDamage: 2
-  magicDamage: 2
+  _hp: 100
+  maxHp: 0
+  physicDamage: 10
+  magicDamage: 12
   critChance: 0
   critDamage: 0
-  physicArmor: 3
-  magicArmor: 3
+  physicArmor: 5
+  magicArmor: 5

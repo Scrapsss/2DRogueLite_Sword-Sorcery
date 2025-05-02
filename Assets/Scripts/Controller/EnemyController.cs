@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class EnemyController : MonoBehaviour
         AttackList[0] = "MeleeAttack_1";
         AttackList[1] = "MeleeAttack_2";
         AttackList[2] = "Empty";
-        AttackList[3] = "Empty";
+        AttackList[3] = "Empty2";
     }
 
     // Update is called once per frame
@@ -140,7 +141,7 @@ public class EnemyController : MonoBehaviour
                     animator.SetTrigger(AnimationStrings.spellCastTrigger);
                     _hasAttacked = true;
                     break;
-                case "Empty":
+                default:
                     NextAttack();
                     break;
             }
@@ -212,9 +213,11 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                _enemyStats.hp -= Damage - _enemyStats.physicArmor;
+                _enemyStats.Health -= Damage - _enemyStats.physicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
-                _uiManagerScript.TookDamage(gameObject, Damage);
+                _uiManagerScript.TookDamage(gameObject, Damage - _enemyStats.physicArmor);
+
+                _enemyStats.enemyHealthChanged.Invoke(_enemyStats.Health, _enemyStats.maxHp);
             }
         }
     }
@@ -230,9 +233,11 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                _enemyStats.hp -= Damage - _enemyStats.magicArmor;
+                _enemyStats.Health -= Damage - _enemyStats.magicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
-                _uiManagerScript.TookDamage(gameObject, Damage);
+                _uiManagerScript.TookDamage(gameObject, Damage - _enemyStats.magicArmor);
+
+                _enemyStats.enemyHealthChanged.Invoke(_enemyStats.Health, _enemyStats.maxHp);
             }
         }
     }

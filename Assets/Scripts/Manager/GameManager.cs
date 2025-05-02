@@ -22,12 +22,16 @@ public class GameManager : MonoBehaviour
 
     public STATE _gameState;
 
+    private void Awake()
+    {
+        Instantiate(HeroPrefab, HeroSpawn);
+        Instantiate(EnemyPrefab, EnemySpawn);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Instantiate(HeroPrefab, HeroSpawn);
-        Instantiate(EnemyPrefab, EnemySpawn);
+        
     }
 
     // Update is called once per frame

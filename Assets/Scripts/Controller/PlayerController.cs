@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 /// <summary>
@@ -188,7 +189,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetTrigger(AnimationStrings.spellCastTrigger);
                     _hasAttacked = true;
                     break;
-                case "Empty":
+                default:
                     NextAttack();
                     break;
             }
@@ -236,9 +237,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                _playerStats.hp -= Damage - _playerStats.physicArmor;
+                _playerStats.Health -= Damage - _playerStats.physicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
-                _uiManagerScript.TookDamage( gameObject, Damage );
+                _uiManagerScript.TookDamage( gameObject, Damage - _playerStats.physicArmor);
+
+                _playerStats.playerHealthChanged.Invoke(_playerStats.Health, _playerStats.maxHp);
             }
         }
     }
@@ -254,9 +257,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                _playerStats.hp -= Damage - _playerStats.magicArmor;
+                _playerStats.Health -= Damage - _playerStats.magicArmor;
                 animator.SetTrigger(AnimationStrings.hitTrigger);
-                _uiManagerScript.TookDamage(gameObject, Damage);
+                _uiManagerScript.TookDamage(gameObject, Damage - _playerStats.magicArmor);
+
+                _playerStats.playerHealthChanged.Invoke(_playerStats.Health, _playerStats.maxHp);
             }
         }
     }

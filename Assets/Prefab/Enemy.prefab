@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager_GO: {fileID: 0}
+  UIManager_GO: {fileID: 0}
 --- !u!114 &-4112024214610124944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,15 +116,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f50b30d065793458e77cfc86bf0311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   name: Enemy
   level: 1
-  hp: 20
-  physicDamage: 1
-  magicDamage: 1
+  _hp: 100
+  maxHp: 0
+  physicDamage: 5
+  magicDamage: 5
   critChance: 0
   critDamage: 0
-  physicArmor: 1
-  magicArmor: 1
+  physicArmor: 3
+  magicArmor: 3
 --- !u!95 &3944631690048881718
 Animator:
   serializedVersion: 7
