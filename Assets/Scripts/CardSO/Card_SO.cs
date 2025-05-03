@@ -1,16 +1,40 @@
 using UnityEngine;
 
-public class Card_SO : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Card", menuName = "Card")]
+
+public class Card_SO : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Sprite _cardImage;
+    public string _cardName;
+    public string _cardDescriptionText;
+    public CardRarity _cardRarity;
+    [Header("Card Stats")]
+    public CardEffect _effectType;
+    public int _value;
+
+
+
+    public void UseCard()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+}
+
+public enum CardRarity
+{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
+}
+
+public enum CardEffect
+{
+    DealPhysicDamage,
+    DealMagicDamage,
 }

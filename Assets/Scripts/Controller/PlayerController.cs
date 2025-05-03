@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour
     public GameObject UIManager_GO;
     private UIManager _uiManagerScript;
 
+    public Button _playButton;
+
 
     //L'état du personnage
     enum STATE { 
@@ -63,11 +66,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //Liste des attaques à faire
-    private string[] AttackList = new string[4];
+    public List<string> AttackList = new List<string>();
     private int _attackListIndex = 0;
     private bool _hasAttacked = false;
 
     private STATE _state = STATE.IDLE;
+
+    public CardManager _cardManager;
 
     private void Awake()
     {
@@ -89,12 +94,12 @@ public class PlayerController : MonoBehaviour
         UIManager_GO = GameObject.FindWithTag("UIManager");
         _uiManagerScript = UIManager_GO.GetComponent<UIManager>();
 
-        _spawnPoint = transform.position.x;
+        _playButton = GameObject.Find("PlayHand").GetComponent<Button>();
+        _playButton.onClick.AddListener(PlayTurn);
 
-        AttackList[0] = "MeleeAttack_1";
-        AttackList[1] = "MeleeAttack_2";
-        AttackList[2] = "SpellCast_1";
-        AttackList[3] = "SpellCast_1";
+        _cardManager = GameObject.Find("-- CardManager --").GetComponent<CardManager>();
+
+        _spawnPoint = transform.position.x;
 
     }
 
@@ -104,12 +109,7 @@ public class PlayerController : MonoBehaviour
         StateManager(_state);
         DeathCheck();
 
-        if (Input.GetKeyDown(KeyCode.Space) && _gameManagerScript._gameState == GameManager.STATE.PLAYERTURN)
-        {
-            _state = STATE.FORWARD;
-            _gameManagerScript._gameState = GameManager.STATE.PLAYERATTACKING;
-            
-        }
+        
 
     }
 
@@ -122,18 +122,41 @@ public class PlayerController : MonoBehaviour
                 _spriteRenderer.flipX = false;
                 //On reset le compteur de la liste
                 _attackListIndex = 0;
+                AttackList.Clear();
                 break;
             case STATE.FORWARD:
                 MoveTowards();
+                
                 break;
             case STATE.ATTACK:
                 Attack();
                 break;
             case STATE.BACKWARD:
                 MoveBackwards();
+                
                 break;
             case STATE.DEAD:
                 break;
+        }
+    }
+
+    private void PlayTurn()
+    {
+        if (_gameManagerScript._gameState == GameManager.STATE.PLAYERTURN && _cardManager._numberSelected > 0)
+        {
+            _state = STATE.FORWARD;
+            _gameManagerScript._gameState = GameManager.STATE.PLAYERATTACKING;
+
+        }
+
+        ListCheck();
+    }
+
+    private void ListCheck()
+    {
+        for (int i = 0; i < AttackList.Count; i++)
+        {
+            print("Reçu : " + AttackList[i]);
         }
     }
 
@@ -172,11 +195,14 @@ public class PlayerController : MonoBehaviour
     //Alors, ici on viens gérer la liste d'attaque, on lis l'attaque actuelle de la liste et on active les animations correspondantes, on se sert du _hasAttacked pour garantir que les trigger ne s'activent qu'une fois
     private void Attack()
     {
+
+        //C'est pour jouer temporairement ça, plus tard on ira chercher une liste de Card_SO et on fera ce que la carte dit
         if (!_hasAttacked)
         {
             switch (AttackList[_attackListIndex])
             {
-                case "MeleeAttack_1":
+                
+                case "Attaque Simple":
                     animator.SetTrigger(AnimationStrings.attackTrigger);
 
                     _hasAttacked = true;
@@ -199,7 +225,7 @@ public class PlayerController : MonoBehaviour
     //Ici on passe à l'attaque suivante et donc on reset _hasAttacked
     private void NextAttack()
     {
-        if ( _attackListIndex >=3 )
+        if ( _attackListIndex >= AttackList.Count -1 )
         {
             AttackFinish();
         } else

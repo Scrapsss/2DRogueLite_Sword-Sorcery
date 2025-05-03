@@ -4,7 +4,10 @@ using UnityEngine.Events;
 public class UnitStats : MonoBehaviour
 {
     public UnityEvent<int, int> playerHealthChanged;
+    public UnityEvent<int> playerLevelChanged;
+
     public UnityEvent<int, int> enemyHealthChanged;
+    public UnityEvent<int> enemyLevelChanged;
 
     [Header("Statistique Principale")]
     public string name;
@@ -48,7 +51,10 @@ public class UnitStats : MonoBehaviour
     {
         maxHp = _hp;
         playerHealthChanged?.Invoke(_hp, maxHp);
+        playerLevelChanged?.Invoke(level);
+
         enemyHealthChanged?.Invoke(_hp, maxHp);
+        enemyLevelChanged?.Invoke(level);
     }
 
     private void Update()
