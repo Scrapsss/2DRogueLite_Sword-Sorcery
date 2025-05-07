@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b161dd7c056e7a842b8bfc2bed9ae9df, type: 3}
-  m_Name: AttaqueSimple
+  m_Name: Foudre
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -2281458042351831758, guid: 41f5e5b3ebffdcc4f845be9dd3b42c7a, type: 3}
-  _name: Attaque Simple
-  _description: "Une attaque simple qui inflige {value} de d\xE9g\xE2ts"
-  _animation: 0
+  _sprite: {fileID: 2450708202969876798, guid: 5ac3a8d104854e842ac2d21dfe4be6f5, type: 3}
+  _name: Foudre
+  _description: "Vous lan\xE7ez un \xE9clair de foudre qui inflige {value} de d\xE9g\xE2ts"
+  _animation: 1
   _effectType: 0
-  _baseValue: 5
+  _baseValue: 10
