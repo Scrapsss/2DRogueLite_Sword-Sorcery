@@ -419,7 +419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1304, y: 27}
+  m_AnchoredPosition: {x: 570, y: 27}
   m_SizeDelta: {x: 230, y: 104}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4625453966426961213
@@ -920,7 +920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 822, y: 27}
+  m_AnchoredPosition: {x: 300, y: 27}
   m_SizeDelta: {x: 230, y: 104}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &5907300181467223123
@@ -1932,7 +1932,6 @@ GameObject:
   - component: {fileID: 5889824159872805821}
   - component: {fileID: 5780114654984682891}
   - component: {fileID: 1858169270202068843}
-  - component: {fileID: 1696875882646439096}
   m_Layer: 5
   m_Name: CardsLayoutGroup
   m_TagString: Untagged
@@ -2023,25 +2022,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1696875882646439096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6808149941465131534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37affaade4490694487a72c91f26769e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cardManager: {fileID: 3564466244792731683}
-  _selectedCard: {fileID: 0}
-  _cards: []
-  _gameManager: {fileID: 0}
-  _canSwap: 0
-  _playButton: {fileID: 0}
-  _playPosition: {x: 0, y: 50, z: 0}
 --- !u!1 &6814033281709746821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,7 +2141,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1490107756368648717}
-  - component: {fileID: 3564466244792731683}
   m_Layer: 0
   m_Name: -- CardManager --
   m_TagString: Untagged
@@ -2188,27 +2167,6 @@ Transform:
   - {fileID: 1561758201676881946}
   m_Father: {fileID: 2936525353673773313}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3564466244792731683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7702105171603068577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e66aeba76b37414b9626a78403dc376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectedCard: {fileID: 0}
-  HoveringMenu: {fileID: 0}
-  _cardsLayoutGroup: {fileID: 1696875882646439096}
-  _offset: {x: 0, y: -50, z: 0}
-  _CardTrackerPrefab: {fileID: 2602862033906327018, guid: f9db9561f217a154b8b03a17c0f93380, type: 3}
-  _CardPrefab: {fileID: 4592341095107533213, guid: 3904337790d2fe84bbbd9d4b0f1f1b05, type: 3}
-  _handSize: 4
-  _numberSelected: 0
-  _gameManager: {fileID: 0}
 --- !u!1 &8106218325093139166
 GameObject:
   m_ObjectHideFlags: 0
