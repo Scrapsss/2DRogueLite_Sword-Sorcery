@@ -12,16 +12,11 @@ public class HealthBar : MonoBehaviour
     public GameObject Enemy_GO;
     private UnitStats _enemyStats;
 
-    public GameObject _playerHealthBar;
-    public GameObject _enemyHealthBar;
-
     public Slider _playerHealthSlider;
-    public TMP_Text[] _playerHealthTextList;
     public TMP_Text _playerHealthText;
     public TMP_Text _playerLevelText;
 
     public Slider _enemyHealthSlider;
-    public TMP_Text[] _enemyHealthTextList;
     public TMP_Text _enemyHealthText;
     public TMP_Text _enemyLevelText;
 
@@ -41,21 +36,11 @@ public class HealthBar : MonoBehaviour
         Enemy_GO = GameObject.FindGameObjectWithTag("Enemy");
         _enemyStats = Enemy_GO.GetComponent<UnitStats>();
 
-        _playerHealthSlider = _playerHealthBar.GetComponent<Slider>();
-        _playerHealthTextList = _playerHealthBar.GetComponentsInChildren<TMP_Text>();
-        _playerHealthText = _playerHealthTextList[0];
-        _playerLevelText = _playerHealthTextList[1];
+        OnPlayerHealthChanged(_unitStats.Health, _unitStats.maxHp);
+        OnPlayerLevelChanged(_unitStats.level);
 
-        _enemyHealthSlider = _enemyHealthBar.GetComponent<Slider>();
-        _enemyHealthTextList = _enemyHealthBar.GetComponentsInChildren<TMP_Text>();
-        _enemyHealthText = _enemyHealthTextList[0];
-        _enemyLevelText = _enemyHealthTextList[1];
-
-        _unitStats.playerHealthChanged.AddListener(OnPlayerHealthChanged);
-        _unitStats.playerLevelChanged.AddListener(OnPlayerLevelChanged);
-
-        _enemyStats.enemyHealthChanged.AddListener(OnEnemyHealthChanged);
-        _enemyStats.enemyLevelChanged.AddListener(OnEnemyLevelChanged);
+        OnEnemyHealthChanged(_enemyStats.Health, _unitStats.maxHp);
+        OnEnemyLevelChanged(_enemyStats.level);
     }
 
     private float CalculateSliderPercentage(float currentHp, float maxHealth)

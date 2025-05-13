@@ -47,9 +47,14 @@ public class UnitStats : MonoBehaviour
     public int physicArmor;
     public int magicArmor;
 
-    private void Start()
+    private void Awake()
     {
         maxHp = _hp;
+    }
+
+    private void Start()
+    {
+        
         playerHealthChanged?.Invoke(_hp, maxHp);
         playerLevelChanged?.Invoke(level);
 
